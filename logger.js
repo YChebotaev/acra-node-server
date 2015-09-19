@@ -53,7 +53,7 @@ exports.findByIdDetail = function(req, res) {
   console.log("findByIdDetail.id:"+id);    
   db.collection(appid, function(err, collection) {
     collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
-        res.render('detail', {locals: {"log":item,"appid":appid,"id":id} });
+        res.render('detail', {"log":item,"appid":appid,"id":id});
     });
   });
 };
@@ -69,7 +69,7 @@ exports.findAll = function(req, res) {
 exports.findAllCollections = function(req, res) {
   console.log("findAllCollections");    
   db.collectionNames(function(err, names){ 
-	res.render('listApps', {locals: {"list":names,"dbname":prop.name_database}});
+	res.render('listApps', {"list":names,"dbname":prop.name_database});
   });  
 }; 
 
@@ -81,7 +81,7 @@ exports.deleteLog = function(req, res) {
     console.log("deleteLog.id:"+id);  
     db.collection(appid, function(err, collection) {
         collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
-    	    res.render('delete', {locals: {"appid":appid,"err":err}});
+    	    res.render('delete', {"appid":appid,"err":err});
         });
     });
 }
@@ -186,7 +186,7 @@ function loadListLogs(appid,res) {
             });
         }
     ], function(err) { 
-        res.render('listLogs', {locals: {"list":resultSearch.logs,"mobiles":resultSearch.agg_phone,"android":resultSearch.android,"dates":resultSearch.dates,"appid":appid} });
+        res.render('listLogs', {"list":resultSearch.logs,"mobiles":resultSearch.agg_phone,"android":resultSearch.android,"dates":resultSearch.dates,"appid":appid});
     });
 }
 
